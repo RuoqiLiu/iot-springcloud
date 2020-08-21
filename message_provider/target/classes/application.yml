@@ -1,0 +1,19 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: MESSAGE-PROVIDER   #服务名称
+  mail:
+    username: roki_liu@163.com
+    password: IOVJXKBZSMNNLBML
+    host: smtp.163.com
+    properties:
+      mail:
+        stmp:
+          ssl:
+            enable: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka #注册到Eureka的地址

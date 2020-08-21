@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrq.dao.UserDao">
+    <select id="selectList" resultType="com.lrq.model.User">
+        select * from user_info where status=1;
+    </select>
+
+
+    <select id="selectByName" resultType="com.lrq.model.User" parameterType="String">
+        select * from user_info where name=#{name} and status=1;
+    </select>
+
+    <select id="selectByCode" resultType="com.lrq.model.User" parameterType="String">
+        select * from user_info where validate_code=#{code};
+    </select>
+
+    <update id="update" parameterType="com.lrq.model.User">
+        update user_info set password=#{password},phone=#{phone},email=#{email},user_key=#{userKey},type=#{type},status=#{status},sex=#{sex},validate_code=#{validateCode},validate_time=#{validateTime} where name=#{name}
+    </update>
+
+    <insert id="insert" parameterType="com.lrq.model.User">
+        INSERT INTO user_info
+        (name,password,phone,email,user_key,type,status,sex,register_time,validate_code,validate_time)
+        VALUES
+        (#{name},#{password},#{phone},#{email},#{userKey},#{type},#{status},#{sex},#{registerTime},#{validateCode},#{validateTime})
+    </insert>
+
+    <delete id="deleteByName" parameterType="String">
+        delete from user_info where name=#{name}
+    </delete>
+</mapper>

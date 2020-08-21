@@ -1,0 +1,19 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: ZUUL-SERVER		#Zuul网关在Eureka的服务名称，随便取
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka	 #Eureka的注册地址
+zuul:
+  ignored-services: "*"      #禁用默认路由
+  prefix: /server            #统一给访问前缀
+  routes:
+    user-service:
+      serviceId: USER-SERVICE-PROVIDER	#值为服务的名称
+      path: /user-service/**  #匹配指定的路径，资源匹配的路径才会拦截，转发
+    email-service:
+      serviceId: MESSAGE-PROVIDER    #值为服务的名称
+      path: /email/**  #匹配指定的路径，资源匹配的路径才会拦截，转发

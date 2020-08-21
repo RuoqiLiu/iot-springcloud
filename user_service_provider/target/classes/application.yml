@@ -1,0 +1,43 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: USER-SERVICE-PROVIDER   #服务名称
+  mvc:
+    date-format: yyyy-MM-dd
+    # mysql
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      #url: jdbc:mysql://localhost:3306/iot_db?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT&useSSL=false
+      url: jdbc:mysql://localhost:3306/iot_db?characterEncoding=gbk&useSSL=false&serverTimezone=GMT
+      type: com.alibaba.druid.pool.DruidDataSource
+
+# mybatis
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+feign:
+  hystrix:
+    enabled: true #开启熔断支持
+  client:
+    config:
+      default:
+        connectTimeout: 5000 # feign 的超时设置
+        readTimeout: 5000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 # 设置hystrix的超时时间为5000ms, 之后才调用降级方法
+
